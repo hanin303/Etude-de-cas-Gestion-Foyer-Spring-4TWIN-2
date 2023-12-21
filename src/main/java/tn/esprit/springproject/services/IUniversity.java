@@ -4,6 +4,7 @@ import tn.esprit.springproject.entities.Foyer;
 import tn.esprit.springproject.entities.University;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IUniversity {
     public University addUniversity(University u);
@@ -17,4 +18,16 @@ public interface IUniversity {
     public void deleteUniversity(long idUniversity);
     public University affecterFoyerAUniversity(long idFoyer, String nomUniversity);
     public University desaffecterFoyerAUniversity(long idUniversity) ;
+
+    public University getByNomUniversity(String nomUniversity);
+    public University getUniversityByNomFoyer(String nomFoyer);
+    List<University> getByAdresse(String adresse);
+
+    Long getNombreTotalChambresByNomUniversity(String nomUniversity);
+    List<String> findFoyersWithoutUniversity();
+
+    List<University> getByNombreMinChambres(int nombreMinChambres) ;
+
+    Map<String, Long> getNombreTotalChambresForAllUniversities();
+
 }

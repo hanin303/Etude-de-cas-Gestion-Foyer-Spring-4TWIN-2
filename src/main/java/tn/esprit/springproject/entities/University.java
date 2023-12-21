@@ -1,6 +1,7 @@
 package tn.esprit.springproject.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +22,7 @@ public class University implements Serializable {
     private long idUniversity;
     private String nomUniversity;
     private String adresse;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    //@JoinColumn(name = "foyer_id_foyer", referencedColumnName = "idFoyer")
+    @OneToOne
+    @JsonManagedReference
     private Foyer foyer;
 }

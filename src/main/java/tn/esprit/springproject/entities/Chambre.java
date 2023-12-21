@@ -18,7 +18,9 @@ import java.util.List;
 
 public class Chambre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   //+ fama auto increment
+    //@GeneratedValue(strategy = GenerationType.AUTO)   //+ par defaut
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)   //+ fama auto hibernate sequence .sequence fi3outh identity bch ena ninseri l id b yedi
     private long idChambre;
     private String numeroChambre;
     @Enumerated(EnumType.STRING)

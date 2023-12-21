@@ -1,13 +1,18 @@
 package tn.esprit.springproject.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import tn.esprit.springproject.entities.Bloc;
+import tn.esprit.springproject.entities.Chambre;
 import tn.esprit.springproject.entities.Foyer;
 import tn.esprit.springproject.entities.University;
 import tn.esprit.springproject.repositories.FoyerRepositoy;
 import tn.esprit.springproject.repositories.UniversityRepository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UniversityServiceImp  implements IUniversity{
@@ -58,4 +63,51 @@ public class UniversityServiceImp  implements IUniversity{
         universityRepository.save(university);
         return university;
     }
+
+    @Override
+    public University getByNomUniversity(String nomUniversity) {
+        return universityRepository.findByNomUniversity(nomUniversity);
+    }
+
+    @Override
+    public University getUniversityByNomFoyer(String nomFoyer) {
+        return universityRepository.findUniversityByFoyer_NomFoyer(nomFoyer);
+    }
+
+    @Override
+    public List<University> getByAdresse(String adresse) {
+        return universityRepository.selectByAdresse(adresse);
+    }
+
+
+    @Override
+    public Long getNombreTotalChambresByNomUniversity(String nomUniversity) {
+        return universityRepository.countChambresByNomUniversity(nomUniversity);
+    }
+
+    @Override
+    public List<University> getByNombreMinChambres(int nombreMinChambres) {
+        return universityRepository.findByNombreMinChambres(nombreMinChambres);
+    }
+
+    @Override
+    public List<String> findFoyersWithoutUniversity() {
+        return universityRepository.findFoyersWithoutUniversity();
+    }
+
+    @Override
+    public Map<String, Long> getNombreTotalChambresForAllUniversities() {
+        List<Object[]> stats = universityRepository.countChambresForAllUniversities();
+
+        Map<String, Long> statisticsMap = new HashMap<>();
+        for (Object[] stat : stats) {
+            String nomUniversity = (String) stat[0];
+            Long totalChambres = (Long) stat[1];
+            statisticsMap.put(nomUniversity, totalChambres);
+        }
+
+        return statisticsMap;
+    }
+
+
 }

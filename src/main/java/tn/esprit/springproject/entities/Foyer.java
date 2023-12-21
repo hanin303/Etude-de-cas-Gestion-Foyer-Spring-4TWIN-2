@@ -1,5 +1,6 @@
 package tn.esprit.springproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,9 @@ public class Foyer implements Serializable {
     private String nomFoyer;
     private long capaciteFoyer;
     @OneToOne(mappedBy = "foyer")
+    @JsonBackReference
     private University university;
+
     @OneToMany(mappedBy = "foyer")
     private List<Bloc> bloc;
 
